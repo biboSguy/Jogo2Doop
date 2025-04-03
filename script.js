@@ -21,8 +21,6 @@ class Entidade{
     }
 }
 
-
-
 class Personagem extends Entidade{
     #velocidade_y
     constructor(x, y, largura, altura, cor){
@@ -70,8 +68,6 @@ class Personagem extends Entidade{
     }
 }
 
-
-
 class Obstaculo extends Entidade{
     #velocidade_x
     constructor(x, y, largura, altura, cor){
@@ -89,42 +85,30 @@ class Obstaculo extends Entidade{
     }
     }
 }
-setInterval(() => {
-    if (!gameOver) {
-        pontuacao += 1; 
+
+class reiniciarJogo {
+    constructor() {
+
+        pontuacao = 0
+        this.x = 100
+        this.y = canvas.height - 50
+        this.velocidade_y = 0
+        this.velocidade_x = 0
+        Obstaculo.x = 550
+        Obstaculo.y = canvas.height - 100
+        objetoSuperior.x = canvas.width
+        objetoMeio.x = canvas.width
+
+        loop()
     }
-}, 50);
-
-function desenharPontuacao() {
-    ctx.fillStyle = "black";
-    ctx.font = '20px Arial';
-    ctx.fillText('Pontos: ' + pontuacao, 10, 30);
 }
-
-function reiniciarJogo() {
-
-    pontuacao = 0;
-    personagem.x = 100;
-    personagem.y = canvas.height - 50;
-    personagem.velocidade_y = 0;
-    personagem.velocidade_x = 0;
-    Obstaculo.x = 550;
-    Obstaculo.y = canvas.height - 100;
-    objetoSuperior.x = canvas.width;
-    objetoMeio.x = canvas.width;
-    gameOver = false;
-
-    loop();
-}
-
-
-
 
 class Jogo{
     static gameOver = false
     static gravidade = 0.5
     constructor(){
         this.loop = this.loop.bind(this)
+        
     }
     loop(){
         ctx.clearRect(0,0,canvas.width, canvas.height)
@@ -137,11 +121,15 @@ class Jogo{
     }
 }
 
-
-
 const personagem = new Personagem(100, canvas.height - 50, 50, 50, 'blue')
 const obstaculo= new Obstaculo(canvas.width - 50, canvas.height - 100, 50, 100, 'red')
 const jogo = new Jogo()
 jogo.loop()
 
-
+/*
+adicionar pontuação
+apertar "space" para resetar o jogo
+privar prorpiedade X do personagem
+utilizar polimorfismo e modificar a função desenhar do personagem e do obstaculo
+criar multiplos obstaculos
+*/
